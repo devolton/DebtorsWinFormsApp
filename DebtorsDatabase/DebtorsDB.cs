@@ -50,7 +50,7 @@ public static class DebtorsDB
                 Surname = reader.GetString(1),
                 Name = reader.GetString(2),
                 Debt = reader.GetDouble(3),
-                Address = reader.GetString(4)
+                Address = reader[4] == DBNull.Value ? "" : reader.GetString(4) //checking for null at database
             };
         }
         reader.Close();
@@ -69,7 +69,7 @@ public static class DebtorsDB
                 Surname = reader.GetString(1),
                 Name = reader.GetString(2),
                 Debt = reader.GetDouble(3),
-                Address = reader.GetString(4)
+                Address = reader[4] == DBNull.Value ? "" : reader.GetString(4) //checking for null at database
 
             };
         }
