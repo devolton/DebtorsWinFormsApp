@@ -16,12 +16,18 @@ namespace DebtorsApp
             _debtor = debtor;
             InitializeComponent();
             _nameTextBox = InitTextBox(debtorNameLabel, "nameTextBox");
+            _nameTextBox.TextChanged += nameTextBox_TextChanged;
             _surnameTextBox = InitTextBox(debtorSurnameLabel, "surnameTextBox");
+            _surnameTextBox.TextChanged += surnameTextBox_TextChanged;
             _debtTextBox = InitTextBox(debtorDebtLabel, "debtTextBox");
+            _debtTextBox.TextChanged += debtTextBox_TextChanged;
             _addressTextBox = InitTextBox(debtorAddressLabel, "addressTextBox");
+            _addressTextBox.TextChanged += addressTextBox_TextChanged;
 
 
         }
+
+
 
         private void DebtorForm_Load(object sender, EventArgs e)
         {
@@ -76,6 +82,7 @@ namespace DebtorsApp
             }
             else
             {
+
                 textBox.Visible = false;
                 label.Visible = true;
                 button.Text = "Change";
@@ -91,10 +98,60 @@ namespace DebtorsApp
                 Id = int.Parse(debtorIdLabel.Text),
                 Name = debtorNameLabel.Text,
                 Surname = debtorSurnameLabel.Text,
-                Debt = double.Parse(debtorDebtLabel.Text),
+                Debt = double.Parse(debtorDebtLabel.Text.Replace('.',',')),
                 Address = debtorAddressLabel.Text
 
             });
+            //add update Main form
+            Close();
         }
+        private void nameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (Validator.IsValidName(_nameTextBox.Text))
+                ValidFieldDrawing(nameButton, _nameTextBox);
+            else
+                InvalidFieldDrawing(nameButton, _nameTextBox);
+        }
+        private void surnameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (Validator.IsValidName(_surnameTextBox.Text))
+                ValidFieldDrawing(surnameButton, _surnameTextBox);
+            else
+                InvalidFieldDrawing(surnameButton, _surnameTextBox);
+
+
+        }
+        private void debtTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (Validator.IsValidDebt(_debtTextBox.Text))
+                ValidFieldDrawing(debtButton, _debtTextBox);
+            else
+                InvalidFieldDrawing(debtButton, _debtTextBox);
+            
+        }
+        private void addressTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (Validator.IsValidAddress(_addressTextBox.Text))
+                ValidFieldDrawing(addressButton, _addressTextBox);
+            else
+                InvalidFieldDrawing(addressButton, _addressTextBox);
+        }
+        private void InvalidFieldDrawing(Button button, TextBox textBox)
+        {
+            button.Enabled = false;
+            updateButton.Enabled = false;
+            textBox.ForeColor = Color.White;
+            textBox.BackColor = Color.Red;
+
+        }
+        private void ValidFieldDrawing(Button button, TextBox textBox)
+        {
+            textBox.BackColor = Color.White;
+            textBox.ForeColor = Color.Black;
+            button.Enabled = true;
+            updateButton.Enabled = true;
+
+        }
+
     }
 }

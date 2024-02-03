@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DebtorsDatabase\DebtorsDatabase.csproj" />
+    <ProjectReference Include="..\FieldsValidator\FieldsValidator.csproj" />
   </ItemGroup>
 
 </Project>

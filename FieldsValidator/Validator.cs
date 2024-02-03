@@ -10,7 +10,7 @@ public static class Validator
 
     static Validator()
     {
-        _debtRegex = new("^[1-9]+([/,/.]\\d+)?$");
+        _debtRegex = new("^[1-9]\\d+([/,/.]\\d+)?$");
         _nameRegex = new("^[A-ZА-Я][a-zа-я]{1,31}$");
         _addressRegex = new("^([A-Z][a-z]{1,16}\\s)?([A-Z][a-z]{1,16}\\s)?[A-Z][a-z]{1,16}\\s\\d{1,3}([a-d])?$");
     }
