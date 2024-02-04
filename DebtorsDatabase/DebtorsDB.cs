@@ -5,7 +5,7 @@ namespace DebtorsDatabase;
 
 public static class DebtorsDB
 {
-    private static readonly string _databaseName = "debtors.db";
+    private static readonly string _databaseName = "../../../../debtors.db";
     private static readonly SqliteConnection _connection;
     private static readonly SqliteCommand _command;
 

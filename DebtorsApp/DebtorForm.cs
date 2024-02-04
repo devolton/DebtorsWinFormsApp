@@ -12,7 +12,7 @@ namespace DebtorsApp
         private TextBox _debtTextBox;
         private TextBox _addressTextBox;
 
-        public DebtorForm(Debtor debtor,Form1 form)
+        public DebtorForm(Debtor debtor, Form1 form)
         {
             _debtor = debtor;
             InitializeComponent();
@@ -65,10 +65,12 @@ namespace DebtorsApp
         {
             var textBox = new TextBox();
             textBox.Name = textBoxName;
+            textBox.Size = new Size(150, 24);
             Controls.Add(textBox);
             textBox.Location = attachedLabel.Location;
             textBox.Text = "Change";
-            textBox.Visible = false;
+            textBox.Visible = false;       
+            textBox.Font = new Font("Georgia", 12);
             return textBox;
 
 
@@ -80,6 +82,7 @@ namespace DebtorsApp
                 textBox.Visible = true;
                 label.Visible = false;
                 button.Text = "Save";
+                button.BackColor = Color.Lime;
                 textBox.Text = label.Text;
             }
             else
@@ -88,6 +91,7 @@ namespace DebtorsApp
                 textBox.Visible = false;
                 label.Visible = true;
                 button.Text = "Change";
+                button.BackColor = Color.Orange;
                 label.Text = textBox.Text;
 
             }
@@ -111,8 +115,8 @@ namespace DebtorsApp
             _debtor.Address = newDebtor.Address;
             _mainForm.RenderUpdatedDebtors();
             Close();
-           
-          
+
+
         }
 
         private void nameTextBox_TextChanged(object sender, EventArgs e)
@@ -152,6 +156,7 @@ namespace DebtorsApp
             updateButton.Enabled = false;
             textBox.ForeColor = Color.White;
             textBox.BackColor = Color.Red;
+            
 
         }
         private void ValidFieldDrawing(Button button, TextBox textBox)
@@ -170,5 +175,7 @@ namespace DebtorsApp
             _mainForm.RenderUpdatedDebtors();
             Close();
         }
+
+
     }
 }
