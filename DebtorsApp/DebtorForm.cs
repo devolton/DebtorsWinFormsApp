@@ -6,12 +6,13 @@ namespace DebtorsApp
     public partial class DebtorForm : Form
     {
         private Debtor _debtor;
+        private Form1 _mainForm;
         private TextBox _nameTextBox;
         private TextBox _surnameTextBox;
         private TextBox _debtTextBox;
         private TextBox _addressTextBox;
 
-        public DebtorForm(Debtor debtor)
+        public DebtorForm(Debtor debtor,Form1 form)
         {
             _debtor = debtor;
             InitializeComponent();
@@ -23,6 +24,7 @@ namespace DebtorsApp
             _debtTextBox.TextChanged += debtTextBox_TextChanged;
             _addressTextBox = InitTextBox(debtorAddressLabel, "addressTextBox");
             _addressTextBox.TextChanged += addressTextBox_TextChanged;
+            _mainForm = form;
 
 
         }
@@ -93,18 +95,26 @@ namespace DebtorsApp
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            DebtorsDB.UpdateDebtor(new Debtor()
+            var newDebtor = new Debtor()
             {
                 Id = int.Parse(debtorIdLabel.Text),
                 Name = debtorNameLabel.Text,
                 Surname = debtorSurnameLabel.Text,
-                Debt = double.Parse(debtorDebtLabel.Text.Replace('.',',')),
+                Debt = double.Parse(debtorDebtLabel.Text.Replace('.', ',')),
                 Address = debtorAddressLabel.Text
 
-            });
-            //add update Main form
+            };
+            DebtorsDB.UpdateDebtor(newDebtor);
+            _debtor.Name = newDebtor.Name;
+            _debtor.Surname = newDebtor.Surname;
+            _debtor.Debt= newDebtor.Debt;
+            _debtor.Address = newDebtor.Address;
+            //_mainForm.RenderUpdatedDebtors();
             Close();
+           
+          
         }
+
         private void nameTextBox_TextChanged(object sender, EventArgs e)
         {
             if (Validator.IsValidName(_nameTextBox.Text))
@@ -127,7 +137,7 @@ namespace DebtorsApp
                 ValidFieldDrawing(debtButton, _debtTextBox);
             else
                 InvalidFieldDrawing(debtButton, _debtTextBox);
-            
+
         }
         private void addressTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -153,5 +163,11 @@ namespace DebtorsApp
 
         }
 
+        private void removeDebtorButton_Click(object sender, EventArgs e)
+        {
+            DebtorsDB.RemoveDebtor(_debtor);
+            _mainForm.RenderUpdatedDebtors();
+            Close();
+        }
     }
 }

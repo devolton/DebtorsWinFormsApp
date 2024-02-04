@@ -48,7 +48,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(451, 450);
             Controls.Add(debtorsListBox);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Load += Form1_Load;
             ResumeLayout(false);

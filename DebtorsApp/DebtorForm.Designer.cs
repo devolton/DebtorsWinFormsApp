@@ -43,6 +43,7 @@
             debtButton = new Button();
             addressButton = new Button();
             updateButton = new Button();
+            removeDebtorButton = new Button();
             SuspendLayout();
             // 
             // nameFieldLabel
@@ -185,11 +186,22 @@
             updateButton.UseVisualStyleBackColor = true;
             updateButton.Click += updateButton_Click;
             // 
+            // removeDebtorButton
+            // 
+            removeDebtorButton.Location = new Point(337, 409);
+            removeDebtorButton.Name = "removeDebtorButton";
+            removeDebtorButton.Size = new Size(94, 29);
+            removeDebtorButton.TabIndex = 15;
+            removeDebtorButton.Text = "Remove";
+            removeDebtorButton.UseVisualStyleBackColor = true;
+            removeDebtorButton.Click += removeDebtorButton_Click;
+            // 
             // DebtorForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(443, 450);
+            Controls.Add(removeDebtorButton);
             Controls.Add(updateButton);
             Controls.Add(addressButton);
             Controls.Add(debtButton);
@@ -205,7 +217,10 @@
             Controls.Add(idFieldLabel);
             Controls.Add(surnameFieldLabel);
             Controls.Add(nameFieldLabel);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "DebtorForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "DebtorForm";
             Load += DebtorForm_Load;
             ResumeLayout(false);
@@ -229,5 +244,6 @@
         private Button debtButton;
         private Button addressButton;
         private Button updateButton;
+        private Button removeDebtorButton;
     }
 }

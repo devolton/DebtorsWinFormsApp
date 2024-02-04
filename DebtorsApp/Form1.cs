@@ -3,17 +3,30 @@ namespace DebtorsApp
 {
     public partial class Form1 : Form
     {
-        private IEnumerable<Debtor> _debtors;
+
+        private List<Debtor> _debtors;
         public Form1()
         {
             InitializeComponent();
         }
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
             _debtors = DebtorsDB.GetAllDebtors().ToList();
             RenderDebtors(_debtors);
 
+
+
+        }
+        public void RenderUpdatedDebtors()
+        {
+            debtorsListBox.Items.Clear();
+            _debtors.Clear();
+            _debtors = DebtorsDB.GetAllDebtors().ToList();
+            MessageBox.Show(_debtors.Count.ToString());
+            RenderDebtors(_debtors);
         }
 
         private void RenderDebtors(IEnumerable<Debtor> debtors)
@@ -28,9 +41,11 @@ namespace DebtorsApp
         {
             int debtorId = debtorsListBox.SelectedIndex;
             var debtor = _debtors.ToList()[debtorId];
-            var debtorForm= new DebtorForm(debtor);
+            var debtorForm = new DebtorForm(debtor,this);
             debtorForm.ShowDialog();
-            
+
         }
+
+
     }
 }
