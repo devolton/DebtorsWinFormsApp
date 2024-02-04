@@ -23,10 +23,14 @@ namespace DebtorsApp
         public void RenderUpdatedDebtors()
         {
             debtorsListBox.Items.Clear();
-            _debtors.Clear();
-            _debtors = DebtorsDB.GetAllDebtors().ToList();
-            MessageBox.Show(_debtors.Count.ToString());
             RenderDebtors(_debtors);
+        }
+        public void RemoveDebtorFromList(Debtor debtor)
+        {
+            if (_debtors.Any(oneDebtor => oneDebtor.Id == debtor.Id))
+            {
+                _debtors.Remove(debtor);
+            }
         }
 
         private void RenderDebtors(IEnumerable<Debtor> debtors)
@@ -41,7 +45,7 @@ namespace DebtorsApp
         {
             int debtorId = debtorsListBox.SelectedIndex;
             var debtor = _debtors.ToList()[debtorId];
-            var debtorForm = new DebtorForm(debtor,this);
+            var debtorForm = new DebtorForm(debtor, this);
             debtorForm.ShowDialog();
 
         }

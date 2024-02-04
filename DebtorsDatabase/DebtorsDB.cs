@@ -69,7 +69,7 @@ public static class DebtorsDB
                 Surname = reader.GetString(1),
                 Name = reader.GetString(2),
                 Debt = reader.GetDouble(3),
-                Address = reader[4] == DBNull.Value ? "" : reader.GetString(4) //checking for null at database
+                Address = reader[4] == DBNull.Value ? "" : reader.GetString(4) 
 
             };
         }
@@ -84,17 +84,13 @@ public static class DebtorsDB
     }
     public static void UpdateDebtor(Debtor debtor)
     {
-        _command.CommandText = @"UPDATE debtors SET
-                                    surname=$newSurname, 
-                                    name=$newName,
-                                    debt=$newDebt,
-                                    address=$newAddress
-                                WHERE id=$id";
-        _command.Parameters.AddWithValue("$newSurname", debtor.Surname);
-        _command.Parameters.AddWithValue("$newName", debtor.Name);
-        _command.Parameters.AddWithValue($"newDebt",debtor.Debt.ToString().Replace(',','.'));
-        _command.Parameters.AddWithValue($"newAddress",debtor.Address);
-        _command.Parameters.AddWithValue("$id", debtor.Id);
+        _command.CommandText =
+            @$"UPDATE debtors SET
+                surname='{debtor.Surname}',
+                name='{debtor.Name}',
+                debt={debtor.Debt},
+                address='{debtor.Address}'
+             WHERE id={debtor.Id}";
         _command.ExecuteNonQuery();
     }   
 

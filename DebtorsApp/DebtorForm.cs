@@ -107,9 +107,9 @@ namespace DebtorsApp
             DebtorsDB.UpdateDebtor(newDebtor);
             _debtor.Name = newDebtor.Name;
             _debtor.Surname = newDebtor.Surname;
-            _debtor.Debt= newDebtor.Debt;
+            _debtor.Debt = newDebtor.Debt;
             _debtor.Address = newDebtor.Address;
-            //_mainForm.RenderUpdatedDebtors();
+            _mainForm.RenderUpdatedDebtors();
             Close();
            
           
@@ -166,6 +166,7 @@ namespace DebtorsApp
         private void removeDebtorButton_Click(object sender, EventArgs e)
         {
             DebtorsDB.RemoveDebtor(_debtor);
+            _mainForm.RemoveDebtorFromList(_debtor);
             _mainForm.RenderUpdatedDebtors();
             Close();
         }
